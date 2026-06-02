@@ -1,0 +1,501 @@
+/* ============================================================
+   FOOTER.CSS — Currentify Site Footer
+   Aesthetic: High-end publication · The Atlantic / Bloomberg
+   Fonts: inherits Inter from site; DM Serif Display for logo
+   ============================================================ */
+
+:root {
+    --f-bg:          #1D3557;        /* deeper, richer navy         */
+    --f-surface:     #0f1f38;        /* card/column well tones      */
+    --f-border:      rgba(255,255,255,0.07);
+    --f-border-md:   rgba(255,255,255,0.12);
+    --f-text:        #b8c8da;        /* body / link text            */
+    --f-muted:       #5e7490;        /* secondary meta text         */
+    --f-heading:     rgba(255,255,255,0.38); /* column label        */
+    --f-white:       #ffffff;
+    --f-red:         #E63946;
+    --f-red-glow:    rgba(230,57,70,0.35);
+    --f-ease:        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   OUTER SHELL
+   ============================================================ */
+
+.site-footer {
+    background-color: var(--f-bg);
+    color: var(--f-text);
+    margin-top: 72px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient radial glow — top-left corner */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(69,123,157,0.12), transparent 65%);
+    pointer-events: none;
+}
+
+/* Ambient radial glow — bottom-right corner */
+.site-footer::after {
+    content: '';
+    position: absolute;
+    bottom: 30px;
+    right: -60px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,57,70,0.07), transparent 65%);
+    pointer-events: none;
+}
+
+/* ── Top rule: gradient fade-in from the red accent ── */
+.footer-rule {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--f-red) 20%,
+        var(--f-red) 80%,
+        transparent 100%
+    );
+    opacity: 0.85;
+}
+
+/* ============================================================
+   MAIN GRID
+   ============================================================ */
+
+.footer-container {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 52px 20px 52px;
+    box-sizing: border-box;
+}
+
+/* ============================================================
+   BRAND COLUMN
+   ============================================================ */
+
+.footer-column--brand {
+    grid-column: 1 / -1;
+}
+
+/* Logo wrap with accent dot */
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.footer-logo {
+    font-family: 'DM Serif Display', 'Georgia', serif;
+    font-size: 1.9rem;
+    font-weight: 400;         /* DM Serif Display shines at 400 */
+    color: var(--f-white);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+/* The small red square accent beside the logo */
+.footer-logo-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--f-red);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-bottom: 2px;
+}
+
+.footer-about {
+    font-size: 0.88rem;
+    line-height: 1.78;
+    color: var(--f-text);
+    margin: 0 0 24px 0;
+    max-width: 400px;
+}
+
+/* Social icons */
+.footer-social {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--f-border-md);
+    border-radius: 10px;
+    color: var(--f-text);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition:
+        background   0.28s ease,
+        border-color 0.28s ease,
+        color        0.28s ease,
+        transform    0.28s var(--f-ease),
+        box-shadow   0.28s ease;
+}
+
+.footer-social a:hover {
+    background: var(--f-red);
+    border-color: var(--f-red);
+    color: var(--f-white);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--f-red-glow);
+}
+
+/* Small brand metadata line */
+.footer-brand-line {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--f-muted);
+    margin: 0;
+}
+
+/* ============================================================
+   SHARED COLUMN STYLES
+   ============================================================ */
+
+/* Column heading: horizontal rule + small-caps label */
+.footer-column h4 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--f-heading);
+    margin: 0 0 22px 0;
+    white-space: nowrap;
+}
+
+/* Trailing line after heading */
+.footer-column h4::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--f-border);
+    min-width: 20px;
+}
+
+/* Nav links */
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 0;
+}
+
+.footer-column ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding: 7px 0;
+    color: var(--f-text);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.3;
+    position: relative;
+    transition: color 0.22s ease, padding-left 0.22s var(--f-ease);
+    border-left: 2px solid transparent;
+}
+
+.footer-column ul li a::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 0%;
+    background: var(--f-red);
+    border-radius: 1px;
+    transition: height 0.22s var(--f-ease);
+}
+
+.footer-column ul li a:hover {
+    color: var(--f-white);
+    padding-left: 10px;
+}
+
+.footer-column ul li a:hover::before {
+    height: 60%;
+}
+
+/* ============================================================
+   CONTACT COLUMN
+   ============================================================ */
+
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.86rem;
+    color: var(--f-text);
+    line-height: 1.4;
+}
+
+/* Icon tile for each contact row */
+.footer-contact-list li i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    background: rgba(230,57,70,0.1);
+    border: 1px solid rgba(230,57,70,0.2);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    color: var(--f-red);
+    margin-top: 1px;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s var(--f-ease);
+}
+
+.footer-contact-list li:hover i {
+    background: var(--f-red);
+    border-color: var(--f-red);
+    color: var(--f-white);
+    transform: scale(1.1);
+}
+
+/* Contact CTA button */
+.footer-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--f-red);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 10px 16px;
+    border: 1px solid rgba(230,57,70,0.3);
+    border-radius: 8px;
+    background: rgba(230,57,70,0.07);
+    transition:
+        background    0.25s ease,
+        border-color  0.25s ease,
+        color         0.25s ease,
+        gap           0.25s var(--f-ease),
+        transform     0.25s var(--f-ease),
+        box-shadow    0.25s ease;
+}
+
+.footer-contact-btn i {
+    font-size: 0.72rem;
+    transition: transform 0.25s var(--f-ease);
+}
+
+.footer-contact-btn:hover {
+    background: var(--f-red);
+    border-color: var(--f-red);
+    color: var(--f-white);
+    gap: 12px;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--f-red-glow);
+}
+
+.footer-contact-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* ============================================================
+   BOTTOM BAR
+   ============================================================ */
+
+.footer-bottom {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--f-border);
+    background: rgba(0,0,0,0.18);
+    padding: 18px 20px;
+}
+
+.footer-bottom-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.76rem;
+    color: var(--f-muted);
+    letter-spacing: 0.02em;
+}
+
+.footer-tagline {
+    font-style: italic;
+    font-size: 0.72rem !important;
+    color: rgba(94,116,144,0.7) !important;
+    letter-spacing: 0.04em !important;
+}
+
+/* ============================================================
+   TABLET: 481px – 768px
+   ============================================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        padding: 52px 24px;
+    }
+
+    .footer-column--brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-about {
+        max-width: 100%;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
+
+/* ============================================================
+   DESKTOP: 769px – 1100px
+   ============================================================ */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+    .site-footer {
+        margin-top: 80px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1.3fr 1fr 1fr;
+        gap: 40px;
+        padding: 60px 28px 56px;
+    }
+
+    .footer-column--brand {
+        grid-column: auto;
+    }
+
+    .footer-column--contact {
+        grid-column: auto;
+    }
+
+    .footer-about {
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+        padding: 0 28px;
+    }
+
+    .footer-bottom {
+        padding: 20px 28px;
+    }
+}
+
+/* ============================================================
+   LARGE DESKTOP: 1101px+
+   ============================================================ */
+
+@media (min-width: 1101px) {
+    .site-footer {
+        margin-top: 90px;
+    }
+
+    .footer-container {
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+        gap: 52px;
+        padding: 72px 40px 64px;
+    }
+
+    .footer-column--brand {
+        grid-column: auto;
+    }
+
+    .footer-column--contact {
+        grid-column: auto;
+    }
+
+    .footer-logo {
+        font-size: 2.1rem;
+    }
+
+    .footer-about {
+        font-size: 0.92rem;
+        max-width: 360px;
+    }
+
+    .footer-column h4 {
+        font-size: 0.67rem;
+        margin-bottom: 24px;
+    }
+
+    .footer-column ul li a {
+        font-size: 0.9rem;
+        padding: 8px 0;
+    }
+
+    .footer-bottom {
+        padding: 22px 40px;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1280px;
+        margin: 0 auto;
+        text-align: left;
+    }
+}

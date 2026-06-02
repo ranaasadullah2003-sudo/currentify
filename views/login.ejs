@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Currentify</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/dropdown.css">
+    
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container"> 
+            
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="site-logo">
+                    <a href="/">Currentify</a>
+                </h1>
+                
+                <form action="/search" method="GET" class="search-bar">
+                    <input type="text" name="query" placeholder="Search news..." required>
+                    <button type="submit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                </form>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+
+                    <li class="has-mega-menu">
+                        <a href="#">Explore Categories ▼</a>
+                        <div class="mega-menu">
+                            
+                            <div class="mega-menu-inner">
+                                <div class="mega-column">
+                                    <h3>Politics & World</h3>
+                                    <a href="/category/Politics & World">All Politics</a>
+                                    <a href="/subcategory/Government & Policy">Government & Policy</a>
+                                    <a href="/subcategory/Elections & Campaigns">Elections & Campaigns</a>
+                                    <a href="/subcategory/Global Diplomacy">Global Diplomacy</a>
+                                    <a href="/subcategory/Conflicts & Crisis">Conflicts & Crisis</a>
+                                    <a href="/subcategory/Human Rights">Human Rights</a>
+                                    <a href="/subcategory/Regional Updates">Regional Updates</a>
+                                </div>
+
+                                <div class="mega-column">
+                                    <h3>Business & Tech</h3>
+                                    <a href="/category/Business & Tech">All Tech</a>
+                                    <a href="/subcategory/Markets & Economy">Markets & Economy</a>
+                                    <a href="/subcategory/Startups & Crypto">Startups & Crypto</a>
+                                    <a href="/subcategory/Artificial Intelligence">Artificial Intelligence</a>
+                                    <a href="/subcategory/Cybersecurity">Cybersecurity</a>
+                                    <a href="/subcategory/Consumer Electronics">Consumer Electronics</a>
+                                    <a href="/subcategory/Software & Apps">Software & Apps</a>
+                                </div>
+
+                                <div class="mega-column">
+                                    <h3>Science & Environment</h3>
+                                    <a href="/category/Science & Environment">All Science</a>
+                                    <a href="/subcategory/Climate & Weather">Climate & Weather</a>
+                                    <a href="/subcategory/Space Exploration">Space Exploration</a>
+                                    <a href="/subcategory/Medical Research">Medical Research</a>
+                                    <a href="/subcategory/Renewable Energy">Renewable Energy</a>
+                                    <a href="/subcategory/Environmental Policy">Environmental Policy</a>
+                                    <a href="/subcategory/Nature & Biodiversity">Nature & Biodiversity</a>
+                                </div>
+
+                                <div class="mega-column">
+                                    <h3>Sports & Lifestyle</h3>
+                                    <a href="/category/Sports & Lifestyle">All Sports</a>
+                                    <a href="/subcategory/Cricket & Football">Cricket & Football</a>
+                                    <a href="/subcategory/Tennis & Motorsports">Tennis & Motorsports</a>
+                                    <a href="/subcategory/Movies & Television">Movies & Television</a>
+                                    <a href="/subcategory/Music Industry">Music Industry</a>
+                                    <a href="/subcategory/Gaming & eSports">Gaming & eSports</a>
+                                    <a href="/subcategory/Travel & Culture">Travel & Culture</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="/about">About Us</a></li>
+
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+        });
+    </script>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Admin Access</h2>
+            <p>Please enter your credentials to manage Currentify.</p>
+
+            <% if (error) { %>
+                <div class="error-msg"><%= error %></div>
+            <% } %>
+
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="admin@currentify.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-login">Unlock Dashboard</button>
+            </form>
+            
+            <a href="/" class="back-home">← Back to Homepage</a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

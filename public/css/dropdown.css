@@ -1,0 +1,274 @@
+﻿/* ============================================================
+   DROPDOWN.CSS â€” Currentify Mega Menu
+   Aesthetic: Dark glass card Â· smooth reveal Â· icon column heads
+   ============================================================ */
+
+:root {
+    --mm-bg:       #1D3557;
+    --mm-surface:  rgba(255,255,255,0.04);
+    --mm-border:   rgba(255,255,255,0.08);
+    --mm-text:     rgba(210,225,240,0.78);
+    --mm-hover:    #ffffff;
+    --mm-red:      #E63946;
+    --mm-ease:     cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   MEGA MENU TRIGGER ITEM
+   ============================================================ */
+
+.main-nav ul li.has-mega-menu {
+    position: static; /* full-width positioning */
+}
+
+/* Chevron icon inside the "Explore" link */
+.explore-chevron {
+    transition: transform 0.3s var(--mm-ease);
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.has-mega-menu.open .explore-chevron,
+.has-mega-menu:focus-within .explore-chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* ============================================================
+   MOBILE: mega menu hidden, toggled via .open class
+   ============================================================ */
+
+.mega-menu {
+    display: none;
+    position: static;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid var(--mm-border);
+    border-bottom: 1px solid var(--mm-border);
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+.has-mega-menu.open > .mega-menu,
+.has-mega-menu:focus-within > .mega-menu {
+    display: block;
+}
+
+.mega-menu-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 8px 0;
+}
+
+/* Column */
+.mega-column {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--mm-border);
+}
+
+.mega-column:last-child {
+    border-bottom: none;
+}
+
+.mega-column h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--mm-red);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--mm-border);
+}
+
+.col-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+/* Links */
+.mega-column a {
+    display: block;
+    color: var(--mm-text) !important;
+    font-size: 0.86rem;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 7px 0 !important;
+    border-left: 2px solid transparent;
+    padding-left: 0 !important;
+    transition: color 0.2s ease, padding-left 0.22s var(--mm-ease), border-color 0.2s;
+    position: relative;
+}
+
+/* "All X" first link â€” bolder */
+.mega-column a:first-of-type {
+    font-weight: 700;
+    color: rgba(220,235,248,0.92) !important;
+    margin-bottom: 2px;
+}
+
+.mega-column a:hover {
+    color: var(--mm-hover) !important;
+    padding-left: 10px !important;
+    border-left-color: var(--mm-red);
+}
+
+/* ============================================================
+   TABLET: 481px â€“ 768px
+   ============================================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .has-mega-menu {
+        position: relative;
+    }
+
+    .mega-menu {
+        display: none;
+        position: static;
+    }
+
+    .has-mega-menu.open > .mega-menu,
+    .has-mega-menu:focus-within > .mega-menu {
+        display: block;
+    }
+
+    .mega-menu-inner {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 12px 0;
+        gap: 0;
+    }
+
+    .mega-column {
+        padding: 16px 20px;
+        border-bottom: none;
+        border-right: 1px solid var(--mm-border);
+    }
+
+    .mega-column:nth-child(even) {
+        border-right: none;
+    }
+}
+
+/* ============================================================
+   DESKTOP: 769px+
+   ============================================================ */
+
+@media (min-width: 769px) {
+    .has-mega-menu {
+        position: static;
+    }
+
+    .mega-menu {
+        display: none;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: var(--mm-bg);
+        border-top: 2px solid var(--mm-red);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        box-shadow:
+            0 20px 48px rgba(0,0,0,0.45),
+            0 4px 12px rgba(0,0,0,0.25);
+        z-index: 998;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition:
+            opacity   0.28s var(--mm-ease),
+            transform 0.28s var(--mm-ease);
+    }
+
+    .has-mega-menu.open > .mega-menu,
+    .has-mega-menu:focus-within > .mega-menu {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mega-menu-inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 32px 40px 36px;
+    }
+
+    .mega-column {
+        padding: 0 32px;
+        border-bottom: none;
+        border-right: 1px solid var(--mm-border);
+    }
+
+    .mega-column:first-child {
+        padding-left: 0;
+    }
+
+    .mega-column:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .mega-column h3 {
+        font-size: 1rem;
+        letter-spacing: 0.18em;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+
+    .mega-column a {
+        font-size: 0.75rem;
+        padding: 6px 0 !important;
+    }
+
+    .mega-column a:hover {
+        padding-left: 10px !important;
+    }
+
+    .mega-menu::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+        background-size: 22px 22px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .mega-menu-inner {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav ul li.has-mega-menu {
+        position: static !important;
+        width: 100% !important;
+    }
+
+    .main-nav ul li.has-mega-menu .mega-menu {
+        position: static !important;
+        top: auto !important;
+        left: 0 !important;
+        right: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .main-nav ul li.has-mega-menu .mega-menu .mega-menu-inner {
+        padding: 16px 12px !important;
+    }
+}
+

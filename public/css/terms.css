@@ -1,0 +1,499 @@
+/* ============================================================
+   TERMS.CSS — Currentify Terms & Conditions
+   Aesthetic: Refined editorial legal — premium, readable, authoritative
+   Fonts: DM Serif Display (headings) + Inter (body) via style.css
+   Brand: #1D3557 navy · #E63946 red · #0d1b2a ink
+   ============================================================ */
+
+/* ── Page-level tokens ── */
+:root {
+    --tc-bg:          #f3f5f8;
+    --tc-surface:     #ffffff;
+    --tc-border:      #e2e8f0;
+    --tc-border-soft: #edf0f4;
+    --tc-text:        #1a2332;
+    --tc-text-muted:  #5a6a7e;
+    --tc-text-light:  #8899aa;
+    --tc-accent:      #E63946;
+    --tc-navy:        #0f2035;
+    --tc-navy-light:  #243f68;
+    --tc-ink:         #0d1b2a;
+    --tc-warn-bg:     #fff8f8;
+    --tc-warn-border: rgba(230, 57, 70, 0.22);
+    --tc-warn-strip:  #E63946;
+    --tc-radius:      14px;
+    --tc-shadow:      0 1px 3px rgba(13,27,42,0.06), 0 4px 20px rgba(13,27,42,0.07);
+    --tc-shadow-lg:   0 2px 8px rgba(13,27,42,0.06), 0 12px 40px rgba(13,27,42,0.1);
+    --tc-ease:        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   LAYOUT WRAPPER
+   ============================================================ */
+
+.legal-wrapper {
+    min-height: calc(100vh - 64px);
+    background: var(--tc-bg);
+    padding: 0 0 96px;
+}
+
+/* ============================================================
+   HERO HEADER
+   ============================================================ */
+
+.legal-header {
+    position: relative;
+    background: var(--tc-navy);
+    overflow: hidden;
+    padding: 72px 24px 60px;
+    text-align: center;
+}
+
+/* Subtle geometric background pattern */
+.legal-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+}
+
+/* Radial fade from center to darken edges */
+.legal-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(230,57,70,0.08) 0%, transparent 65%),
+                radial-gradient(ellipse 120% 60% at 50% 110%, rgba(13,27,42,0.5) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.legal-header h1 {
+    position: relative;
+    z-index: 1;
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+    margin: 0 0 18px;
+    line-height: 1.1;
+}
+
+/* Red underscore accent beneath the h1 */
+.legal-header h1::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--tc-accent);
+    border-radius: 2px;
+    margin: 16px auto 0;
+}
+
+.legal-header p {
+    position: relative;
+    z-index: 1;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(220, 232, 245, 0.55);
+    margin: 0;
+}
+
+/* ============================================================
+   TWO-COLUMN LAYOUT: TOC + CONTENT
+   ============================================================ */
+
+.legal-content {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 24px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: relative;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+
+.legal-content section {
+    background: var(--tc-surface);
+    border: 1px solid var(--tc-border);
+    border-radius: var(--tc-radius);
+    padding: 40px 44px;
+    margin-bottom: 20px;
+    box-shadow: var(--tc-shadow);
+    position: relative;
+    transition: box-shadow 0.3s var(--tc-ease);
+}
+
+.legal-content section:hover {
+    box-shadow: var(--tc-shadow-lg);
+}
+
+/* Numbered section indicator line on left edge */
+.legal-content section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 28px;
+    bottom: 28px;
+    width: 3px;
+    background: var(--tc-border-soft);
+    border-radius: 0 2px 2px 0;
+    transition: background 0.3s ease;
+}
+
+.legal-content section:hover::before {
+    background: var(--tc-accent);
+    opacity: 0.45;
+}
+
+/* ============================================================
+   HEADINGS INSIDE SECTIONS
+   ============================================================ */
+
+.legal-content h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--tc-navy);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0 0 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--tc-border-soft);
+}
+
+.legal-content h3 {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--tc-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legal-content h3::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    flex-shrink: 0;
+}
+
+/* First h3 in a section gets less top margin */
+.legal-content h2 + h3 {
+    margin-top: 4px;
+}
+
+/* ============================================================
+   BODY COPY
+   ============================================================ */
+
+.legal-content p {
+    font-family: var(--sans);
+    font-size: 0.955rem;
+    line-height: 1.82;
+    color: var(--tc-text);
+    margin: 0 0 16px;
+}
+
+.legal-content p:last-child {
+    margin-bottom: 0;
+}
+
+.legal-content strong {
+    font-weight: 600;
+    color: var(--tc-ink);
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.legal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.legal-content ul li {
+    font-family: var(--sans);
+    font-size: 0.935rem;
+    line-height: 1.72;
+    color: var(--tc-text);
+    padding: 12px 16px 12px 44px;
+    background: var(--tc-bg);
+    border: 1px solid var(--tc-border-soft);
+    border-radius: 8px;
+    position: relative;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.legal-content ul li:hover {
+    border-color: rgba(230,57,70,0.18);
+    background: #fdfcfc;
+}
+
+/* Custom bullet — small navy square */
+.legal-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--tc-navy);
+    border-radius: 1.5px;
+    opacity: 0.35;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.legal-content ul li:hover::before {
+    background: var(--tc-accent);
+    opacity: 0.8;
+}
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+.legal-content a {
+    color: var(--tc-navy);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1.5px solid rgba(29,53,87,0.25);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.legal-content a:hover {
+    color: var(--tc-accent);
+    border-bottom-color: rgba(230,57,70,0.5);
+}
+
+/* ============================================================
+   DISCLAIMER BOX — Section 8
+   ============================================================ */
+
+.legal-content section.disclaimer-box {
+    background: var(--tc-warn-bg);
+    border-color: var(--tc-warn-border);
+    border-left: none;
+    box-shadow: var(--tc-shadow), inset 4px 0 0 var(--tc-warn-strip);
+    border-radius: 0 var(--tc-radius) var(--tc-radius) 0;
+}
+
+.legal-content section.disclaimer-box::before {
+    display: none;
+}
+
+.legal-content section.disclaimer-box h2 {
+    color: #b01c27;
+    border-bottom-color: rgba(230,57,70,0.15);
+}
+
+.legal-content section.disclaimer-box h3 {
+    color: #c0202b;
+}
+
+.legal-content section.disclaimer-box h3::before {
+    background: #c0202b;
+}
+
+.legal-content section.disclaimer-box p {
+    color: #3d1a1c;
+}
+
+.legal-content section.disclaimer-box ul li {
+    background: rgba(230,57,70,0.04);
+    border-color: rgba(230,57,70,0.14);
+    color: #3d1a1c;
+}
+
+.legal-content section.disclaimer-box ul li::before {
+    background: var(--tc-accent);
+    opacity: 0.6;
+}
+
+/* Alert badge in disclaimer heading */
+.legal-content section.disclaimer-box h2::before {
+    content: '⚠';
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    margin-right: 10px;
+    opacity: 0.7;
+    vertical-align: middle;
+}
+
+/* ============================================================
+   LAST SECTION (Contact) — Special treatment
+   ============================================================ */
+
+.legal-content section:last-child {
+    background: var(--tc-navy);
+    border-color: transparent;
+    box-shadow: var(--tc-shadow-lg);
+}
+
+.legal-content section:last-child::before {
+    background: var(--tc-accent);
+    opacity: 1;
+}
+
+.legal-content section:last-child h2 {
+    color: #ffffff;
+    border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.legal-content section:last-child p {
+    color: rgba(220,232,245,0.75);
+}
+
+.legal-content section:last-child strong {
+    color: #ffffff;
+}
+
+.legal-content section:last-child ul li {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+    color: rgba(220,232,245,0.8);
+}
+
+.legal-content section:last-child ul li:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(230,57,70,0.35);
+}
+
+.legal-content section:last-child ul li::before {
+    background: var(--tc-accent);
+    opacity: 0.9;
+}
+
+.legal-content section:last-child a {
+    color: rgba(220,232,245,0.9);
+    border-bottom-color: rgba(220,232,245,0.2);
+}
+
+.legal-content section:last-child a:hover {
+    color: #ffffff;
+    border-bottom-color: rgba(230,57,70,0.7);
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (481px–768px)
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .legal-header {
+        padding: 52px 20px 48px;
+    }
+
+    .legal-content {
+        padding: 36px 16px 0;
+    }
+
+    .legal-content section {
+        padding: 28px 24px;
+        margin-bottom: 14px;
+    }
+
+    .legal-content section::before {
+        top: 20px;
+        bottom: 20px;
+    }
+
+    .legal-content h2 {
+        margin-bottom: 18px;
+        padding-bottom: 14px;
+    }
+
+    .legal-content ul li {
+        padding: 11px 14px 11px 40px;
+    }
+
+    .legal-content ul li::before {
+        left: 15px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (≤480px)
+   ============================================================ */
+
+@media (max-width: 480px) {
+    .legal-header {
+        padding: 40px 16px 36px;
+    }
+
+    .legal-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .legal-content {
+        padding: 24px 12px 0;
+    }
+
+    .legal-content section {
+        padding: 22px 18px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .legal-content section.disclaimer-box {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .legal-content h2 {
+        font-size: 1.15rem;
+    }
+
+    .legal-content p,
+    .legal-content ul li {
+        font-size: 0.9rem;
+    }
+
+    .legal-content ul li {
+        padding: 10px 12px 10px 36px;
+    }
+
+    .legal-content ul li::before {
+        left: 13px;
+    }
+}
+
+/* ============================================================
+   LARGE DESKTOP (1200px+)
+   ============================================================ */
+
+@media (min-width: 1200px) {
+    .legal-header {
+        padding: 96px 24px 80px;
+    }
+
+    .legal-content {
+        padding: 64px 32px 0;
+    }
+
+    .legal-content section {
+        padding: 48px 56px;
+    }
+}

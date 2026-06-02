@@ -1,0 +1,84 @@
+<footer class="site-footer">
+
+    <!-- Decorative top rule with gradient fade -->
+    <div class="footer-rule"></div>
+
+    <div class="footer-container">
+
+        <!-- ── Brand Column ── -->
+        <div class="footer-column footer-column--brand">
+            <div class="footer-logo-wrap">
+                <h3 class="footer-logo">Currentify</h3>
+                <span class="footer-logo-dot"></span>
+            </div>
+            <p class="footer-about">
+                A modern digital publication delivering thoughtful insights across politics, technology, science, and culture. We believe in clarity, not clickbait. Depth, not distraction.
+            </p>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <p class="footer-brand-line">Est. 2026 &nbsp;·&nbsp; Lahore, Pakistan</p>
+        </div>
+
+        <!-- ── Explore Column ── -->
+        <div class="footer-column">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/category/Politics & World">Politics &amp; World</a></li>
+                <li><a href="/category/Business & Tech">Business &amp; Tech</a></li>
+                <li><a href="/category/Science & Environment">Science &amp; Environment</a></li>
+                <li><a href="/category/Sports & Lifestyle">Sports &amp; Lifestyle</a></li>
+            </ul>
+        </div>
+
+        <!-- ── Company Column ── -->
+        <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <% if (isAdmin) { %>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                <% } %>
+            </ul>
+        </div>
+
+        <!-- ── Contact Column ── -->
+        <div class="footer-column footer-column--contact">
+            <h4>Contact</h4>
+            <ul class="footer-contact-list">
+                <li>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>support@currentify.com</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Lahore, Pakistan</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Response within 24 hours</span>
+                </li>
+            </ul>
+            <a href="/contact" class="footer-contact-btn">
+                Send us a message
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ── Bottom Bar ── -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+            <p>&copy; 2026 Currentify. All rights reserved.</p>
+            <p class="footer-tagline">Built with care. Written with purpose.</p>
+        </div>
+    </div>
+
+</footer>

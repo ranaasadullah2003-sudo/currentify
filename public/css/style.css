@@ -1,0 +1,699 @@
+/* ============================================================
+   STYLE.CSS — Currentify Global Stylesheet
+   Aesthetic: Precision editorial masthead · The Verge / Linear
+   Fonts: DM Serif Display (logo) + Inter (nav / body)
+   ============================================================ */
+
+/* ── Prevent layout shift on scrollbar ── */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* ── CSS Custom Properties ── */
+:root {
+    /* Header */
+    --h-bg:          #1D3557;
+    --h-bg-scrolled: rgba(10, 22, 40, 0.97);
+    --h-border:      rgba(255,255,255,0.07);
+    --h-height-mob:  60px;
+    --h-height-desk: 64px;
+
+    /* Brand */
+    --nav-text:      rgba(220,232,245,0.82);
+    --nav-hover:     #ffffff;
+    --nav-active:    #E63946;
+
+    /* Global */
+    --red:           #E63946;
+    --red-dk:        #bf2733;
+    --navy:          #1D3557;
+    --ink:           #0d1b2a;
+    --ease:          cubic-bezier(0.22, 1, 0.36, 1);
+    --sans:          'Inter', system-ui, -apple-system, sans-serif;
+    --serif:         'DM Serif Display', Georgia, serif;
+}
+
+/* ============================================================
+   GENERAL RESET
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding-top: var(--h-height-mob);
+    font-family: var(--sans);
+    background-color: #f3f5f8;
+    color: var(--ink);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   HEADER SHELL
+   ============================================================ */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--h-height-mob);
+    background-color: var(--h-bg);
+    border-bottom: 1px solid var(--h-border);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle backdrop blur when JS adds .scrolled class */
+.site-header.scrolled {
+    background-color: var(--h-bg-scrolled);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 28px rgba(0,0,0,0.35);
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+}
+
+/* ============================================================
+   HEADER LEFT (logo + search)
+   ============================================================ */
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.site-logo {
+    margin: 0;
+    line-height: 1;
+}
+
+.site-logo a {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 400;            /* DM Serif Display excels at 400 */
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    position: relative;
+    transition: opacity 0.2s;
+}
+
+.site-logo a:hover {
+    opacity: 0.88;
+}
+
+/* Small red square dot after the logo */
+.logo-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--red);
+    border-radius: 1.5px;
+    margin-left: 3px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease);
+}
+
+.site-logo a:hover .logo-dot {
+    transform: scale(1.35) rotate(45deg);
+}
+
+/* ============================================================
+   DESKTOP SEARCH BAR
+   ============================================================ */
+
+.search-bar {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50px;
+    padding: 0 10px 0 12px;
+    height: 34px;
+    width: 220px;
+    transition: width 0.35s var(--ease), background 0.25s ease, border-color 0.25s ease;
+    overflow: hidden;
+}
+
+.search-bar:focus-within {
+    background: rgba(255,255,255,0.13);
+    border-color: rgba(230,57,70,0.55);
+    width: 280px;
+}
+
+.search-icon {
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.45);
+    transition: color 0.2s;
+}
+
+.search-bar:focus-within .search-icon {
+    color: var(--red);
+}
+
+.search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    padding: 0;
+    min-width: 0;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255,255,255,0.38);
+}
+
+.search-bar button[type="submit"] {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+}
+
+.search-bar button[type="submit"]:hover {
+    color: var(--red);
+    background: rgba(230,57,70,0.12);
+}
+
+/* ============================================================
+   MOBILE HAMBURGER BUTTON
+   ============================================================ */
+
+.mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px 9px;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.mobile-menu-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.hamburger-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 2px;
+    transition: transform 0.3s var(--ease), opacity 0.25s ease, width 0.3s var(--ease);
+    transform-origin: center;
+}
+
+/* Open state: morphs bars into × */
+.mobile-menu-btn.is-open .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-btn.is-open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.mobile-menu-btn.is-open .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   MOBILE NAVIGATION DRAWER
+   ============================================================ */
+
+.main-nav {
+    position: fixed;
+    top: var(--h-height-mob);
+    left: 0;
+    width: 100%;
+    /* Slide-down via max-height transition */
+    max-height: 0;
+    overflow: hidden;
+    background-color: var(--h-bg);
+    border-top: 1px solid var(--h-border);
+    z-index: 999;
+    transition: max-height 0.4s var(--ease);
+}
+
+.main-nav.active {
+    max-height: calc(100vh - var(--h-height-mob));
+    overflow-y: auto;
+}
+
+/* ── Mobile search inside drawer ── */
+.mobile-search-bar {
+    display: block;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.mobile-search-bar form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 9px 12px;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.mobile-search-bar form:focus-within {
+    background: rgba(255,255,255,0.11);
+    border-color: rgba(230,57,70,0.5);
+}
+
+.mobile-search-bar form > svg:first-child {
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.4);
+}
+
+.mobile-search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    padding: 0;
+}
+
+.mobile-search-bar input::placeholder {
+    color: rgba(255,255,255,0.38);
+}
+
+.mobile-search-bar button[type="submit"] {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.mobile-search-bar button[type="submit"]:hover {
+    color: var(--red);
+}
+
+/* ── Nav list ── */
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-nav li {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.main-nav li:last-child {
+    border-bottom: none;
+}
+
+.main-nav > ul > li > a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px 20px;
+    color: var(--nav-text);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s, padding-left 0.25s var(--ease);
+}
+
+.main-nav > ul > li > a:hover {
+    color: var(--nav-hover);
+    background: rgba(255,255,255,0.05);
+    padding-left: 26px;
+}
+
+/* Divider between regular nav and admin items */
+.nav-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1) !important;
+    padding: 0 !important;
+    margin: 6px 20px;
+    border: none !important;
+    display: block !important;
+}
+
+/* Admin dashboard link in mobile */
+.nav-admin-link {
+    color: rgba(230,57,70,0.85) !important;
+}
+
+/* ============================================================
+   ADMIN BUTTONS
+   ============================================================ */
+
+/* + Post button */
+.btn-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--red);
+    color: #ffffff !important;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-decoration: none !important;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    margin-left: 4px;
+    box-shadow: 0 3px 10px rgba(230,57,70,0.3);
+    transition:
+        background   0.25s ease,
+        box-shadow   0.25s ease,
+        transform    0.25s var(--ease);
+}
+
+.btn-add:hover {
+    background: var(--red-dk);
+    box-shadow: 0 6px 18px rgba(230,57,70,0.42);
+    transform: translateY(-2px);
+}
+
+.btn-add:active {
+    transform: translateY(0);
+}
+
+/* In mobile: full-width treatment */
+.main-nav li .btn-add {
+    display: flex;
+    margin: 8px 16px;
+    width: calc(100% - 32px);
+    justify-content: center;
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+/* Logout */
+.btn-logout {
+    color: rgba(148,163,184,0.8) !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 13px 20px !important;
+    transition: color 0.2s !important;
+    background: none !important;
+}
+
+.btn-logout:hover {
+    color: var(--red) !important;
+    background: transparent !important;
+    padding-left: 20px !important;
+}
+
+/* ============================================================
+   TABLET: 481px – 768px
+   ============================================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    :root {
+        --h-height-mob: 66px;
+    }
+
+    body {
+        padding-top: 66px;
+    }
+
+    .header-container {
+        padding: 0 20px;
+    }
+
+    .site-logo a {
+        font-size: 1.5rem;
+    }
+
+    .header-left {
+        gap: 18px;
+    }
+
+    /* Show search bar on tablet */
+    .search-bar {
+        display: flex;
+        width: 200px;
+    }
+
+    .mobile-search-bar {
+        display: none;
+    }
+
+    .main-nav {
+        top: 66px;
+        max-height: 0;
+    }
+
+    .main-nav.active {
+        max-height: calc(100vh - 66px);
+    }
+}
+
+/* ============================================================
+   DESKTOP: 769px+
+   ============================================================ */
+
+@media (min-width: 769px) {
+    :root {
+        --h-height-mob: var(--h-height-desk);
+    }
+
+    body {
+        padding-top: var(--h-height-desk);
+    }
+
+    .site-header {
+        height: var(--h-height-desk);
+    }
+
+    .header-container {
+        padding: 0 28px;
+    }
+
+    .header-left {
+        gap: 24px;
+    }
+
+    .site-logo a {
+        font-size: 1.55rem;
+    }
+
+    /* Visible search bar */
+    .search-bar {
+        display: flex;
+        width: 230px;
+    }
+
+    .mobile-search-bar {
+        display: none !important;
+    }
+
+    /* Nav becomes a horizontal inline bar */
+    .main-nav {
+        position: static;
+        top: auto;
+        width: auto;
+        max-height: none;
+        overflow: visible;
+        height: var(--h-height-desk);
+        background: transparent;
+        border: none;
+        display: flex !important;
+        align-items: center;
+        transition: none;
+    }
+
+    .main-nav ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        padding: 0;
+        gap: 0;
+        flex-wrap: nowrap;
+    }
+
+    .main-nav li {
+        height: 100%;
+        border-bottom: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Desktop nav links */
+    .main-nav > ul > li > a {
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 7px;
+        font-size: 0.83rem;
+        font-weight: 500;
+        color: var(--nav-text);
+        text-decoration: none;
+        white-space: nowrap;
+        position: relative;
+        transition: color 0.22s ease, padding-left 0s;
+        gap: 5px;
+    }
+
+    /* Red underline grows from center on hover */
+    .main-nav > ul > li > a::after {
+        content: '';
+        position: absolute;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0%;
+        height: 2px;
+        background: var(--red);
+        border-radius: 2px;
+        transition: width 0.28s var(--ease);
+    }
+
+    .main-nav > ul > li > a:hover {
+        color: var(--nav-hover);
+        background: transparent;
+        padding-left: 11px; /* reset mobile left-shift */
+    }
+
+    .main-nav > ul > li > a:hover::after {
+        width: calc(100% - 22px);
+    }
+
+    /* Admin dashboard link */
+    .nav-admin-link {
+        color: rgba(230,57,70,0.8) !important;
+    }
+
+    .nav-admin-link:hover {
+        color: var(--red) !important;
+    }
+
+    .nav-admin-link::after {
+        background: var(--red);
+    }
+
+    /* Remove underline from btn-add and btn-logout */
+    .btn-add::after,
+    .btn-logout::after {
+        display: none;
+    }
+
+    .main-nav li .btn-add {
+        display: inline-flex;
+        align-items: center;
+        height: 60%;
+        margin: 0 0 0 8px;
+        width: auto;
+        border-radius: 8px;
+        padding: 0 16px;
+    }
+
+    .btn-logout {
+        padding: 0 8px !important;
+        letter-spacing: 0.08em;
+        font-size: 0.72rem !important;
+    }
+
+    .btn-logout:hover {
+        padding-left: 8px !important;
+    }
+
+    .nav-divider {
+        width: 1px;
+        height: 20px;
+        background: rgba(255,255,255,0.12) !important;
+        margin: 0 6px !important;
+        padding: 0 !important;
+        border: none !important;
+        display: flex !important;
+        align-items: center;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+    }
+}
+
+/* ============================================================
+   LARGE DESKTOP: 1200px+
+   ============================================================ */
+
+@media (min-width: 1200px) {
+    .header-container {
+        padding: 0 40px;
+    }
+
+    .search-bar {
+        width: 260px;
+    }
+
+    .main-nav > ul > li > a {
+        padding: 0 8px;
+        font-size: 0.85rem;
+    }
+}

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currentify - Daily Updates</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dropdown.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container"> 
+            
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="site-logo">
+                    <a href="/">Currentify</a>
+                </h1>
+                
+                <form action="/search" method="GET" class="search-bar">
+                    <input type="text" name="query" placeholder="Search news..." required>
+                    <button type="submit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                </form>
+            </div>
+
+            <nav class="main-nav">
+                <div class="mobile-search-bar">
+                    <form action="/search" method="GET">
+                        <input type="text" name="query" placeholder="Search news..." required>
+                        <button type="submit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </form>
+                </div>
+                <ul>
+                    <li><a href="/">Home</a></li>
+
+                    <li class="has-mega-menu">
+                        <a href="#">Explore Categories ▼</a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-inner">
+                                <div class="mega-column">
+                                    <h3>Politics & World</h3>
+                                    <a href="/category/Politics & World">All Politics</a>
+                                    <a href="/subcategory/Government & Policy">Government & Policy</a>
+                                    <a href="/subcategory/Elections & Campaigns">Elections & Campaigns</a>
+                                    <a href="/subcategory/Global Diplomacy">Global Diplomacy</a>
+                                    <a href="/subcategory/Conflicts & Crisis">Conflicts & Crisis</a>
+                                    <a href="/subcategory/Human Rights">Human Rights</a>
+                                    <a href="/subcategory/Regional Updates">Regional Updates</a>
+                                </div>
+                                <div class="mega-column">
+                                    <h3>Business & Tech</h3>
+                                    <a href="/category/Business & Tech">All Tech</a>
+                                    <a href="/subcategory/Markets & Economy">Markets & Economy</a>
+                                    <a href="/subcategory/Startups & Crypto">Startups & Crypto</a>
+                                    <a href="/subcategory/Artificial Intelligence">Artificial Intelligence</a>
+                                    <a href="/subcategory/Cybersecurity">Cybersecurity</a>
+                                    <a href="/subcategory/Consumer Electronics">Consumer Electronics</a>
+                                    <a href="/subcategory/Software & Apps">Software & Apps</a>
+                                </div>
+                                <div class="mega-column">
+                                    <h3>Science & Environment</h3>
+                                    <a href="/category/Science & Environment">All Science</a>
+                                    <a href="/subcategory/Climate & Weather">Climate & Weather</a>
+                                    <a href="/subcategory/Space Exploration">Space Exploration</a>
+                                    <a href="/subcategory/Medical Research">Medical Research</a>
+                                    <a href="/subcategory/Renewable Energy">Renewable Energy</a>
+                                    <a href="/subcategory/Environmental Policy">Environmental Policy</a>
+                                    <a href="/subcategory/Nature & Biodiversity">Nature & Biodiversity</a>
+                                </div>
+                                <div class="mega-column">
+                                    <h3>Sports & Lifestyle</h3>
+                                    <a href="/category/Sports & Lifestyle">All Sports</a>
+                                    <a href="/subcategory/Cricket & Football">Cricket & Football</a>
+                                    <a href="/subcategory/Tennis & Motorsports">Tennis & Motorsports</a>
+                                    <a href="/subcategory/Movies & Television">Movies & Television</a>
+                                    <a href="/subcategory/Music Industry">Music Industry</a>
+                                    <a href="/subcategory/Gaming & eSports">Gaming & eSports</a>
+                                    <a href="/subcategory/Travel & Culture">Travel & Culture</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+                    <% if (isAdmin) { %>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/add" class="btn-add">+ Post</a></li>
+                        <li><a href="/logout" class="btn-logout">Logout</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+        });
+    </script>
+
+    <!-- ===================== HERO SECTION ===================== -->
+    <section class="hero-section">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="/uploads/news-bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="hero-heading">
+                <span class="hero-heading-line">Latest Global</span>
+                <span class="hero-heading-line hero-heading-accent">Updates</span>
+            </h2>
+            <p class="hero-subtext">Thoughts, insights, and deep dives into the stories shaping our world.</p>
+        </div>
+    </section>
+
+    <div class="ad-space">
+        <p>[AD SPACE: This is where your AdSense code will eventually go]</p>
+    </div>
+
+    <main class="main-layout">
+
+        <section class="posts-container">
+            <% if (posts.length === 0) { %>
+                <div class="empty-state">
+                    <h2>No posts uploaded yet!</h2>
+                    <p>We are currently gathering the latest updates for this topic.</p>
+                    <a href="/" class="btn-return">Return to Latest News</a>
+                </div>
+            <% } else { %>
+
+                <%
+                    // Slice groups for layout
+                    var featuredPost   = posts.slice(0, 1);    // 1 hero card
+                    var sidebarPosts   = posts.slice(1, 4);    // 3 side stack
+                    var gridPosts      = posts.slice(4, 10);   // 6-card 3-col grid
+                    var remainingPosts = posts.slice(10);      // overflow 4-col
+                %>
+
+                <!-- ── ZONE 1: FEATURED STRIP (1 hero + 3 stacked) ── -->
+                <div class="zone zone-featured">
+
+                    <!-- Big featured card -->
+                    <% posts.slice(0, 1).forEach(function(post) { %>
+                        <article class="post-card post-card-hero">
+                            <div class="post-image-wrapper">
+                                <% if (post.video) { %>
+                                    <video muted onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" class="post-image">
+                                        <source src="<%= post.video %>" type="video/mp4">
+                                    </video>
+                                <% } else if (post.image) { %>
+                                    <img src="<%= post.image %>" alt="<%= post.title %>" class="post-image">
+                                <% } %>
+                                <div class="card-image-scrim"></div>
+                            </div>
+                            <div class="post-card-body">
+                                <h3 class="post-title post-title--hero">
+                                    <a href="#" class="sidebar-trigger"
+                                        data-post-id="<%= post._id %>"
+                                        data-title="<%= post.title %>"
+                                        data-content="<%= post.content %>"
+                                        data-image="<%= post.image || '/images/placeholder.jpg' %>"
+                                        data-category="<%= post.category %>"
+                                        data-date="<%= new Date(post.createdAt).toLocaleDateString() %>"
+                                        data-references="<%= post.references || '' %>"><%= post.title %></a>
+                                </h3>
+                                <p class="post-excerpt"><%= post.content.substring(0, 140) %>…</p>
+                                <div class="card-footer">
+                                    <a href="#" class="read-more sidebar-trigger"
+                                        data-post-id="<%= post._id %>"
+                                        data-title="<%= post.title %>"
+                                        data-content="<%= post.content %>"
+                                        data-image="<%= post.image || '/images/placeholder.jpg' %>"
+                                        data-category="<%= post.category %>"
+                                        data-date="<%= new Date(post.createdAt).toLocaleDateString() %>"
+                                        data-references="<%= post.references || '' %>">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                                    <% if (isAdmin) { %>
+                                        <div class="admin-actions">
+                                            <a href="/edit/<%= post._id %>" class="btn-edit">Edit</a>
+                                            <form method="POST" action="/delete/<%= post._id %>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                                <button type="submit" class="btn-delete">Delete</button>
+                                            </form>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </article>
+                    <% }); %>
+
+                    <!-- Stacked side cards (posts 2–4) -->
+                    <div class="featured-stack">
+                        <% posts.slice(1, 4).forEach(function(post) { %>
+                            <article class="post-card post-card-stack">
+                                <div class="post-image-wrapper">
+                                    <% if (post.video) { %>
+                                        <video muted onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" class="post-image">
+                                            <source src="<%= post.video %>" type="video/mp4">
+                                        </video>
+                                    <% } else if (post.image) { %>
+                                        <img src="<%= post.image %>" alt="<%= post.title %>" class="post-image">
+                                    <% } %>
+                                </div>
+                                <div class="post-card-body">
+                                    <h3 class="post-title">
+                                        <a href="#" class="sidebar-trigger"
+                                            data-post-id="<%= post._id %>"
+                                            data-title="<%= post.title %>"
+                                            data-content="<%= post.content %>"
+                                            data-image="<%= post.image || '/images/placeholder.jpg' %>"
+                                            data-category="<%= post.category %>"
+                                            data-date="<%= new Date(post.createdAt).toLocaleDateString() %>"
+                                            data-references="<%= post.references || '' %>"><%= post.title %></a>
+                                    </h3>
+                                    <p class="post-excerpt post-excerpt--stack"><%= post.content.substring(0, 60) %>…</p>
+                                    <div class="card-footer">
+                                        <a href="#" class="read-more sidebar-trigger"
+                                            data-post-id="<%= post._id %>"
+                                            data-title="<%= post.title %>"
+                                            data-content="<%= post.content %>"
+                                            data-image="<%= post.image || '/images/placeholder.jpg' %>"
+                                            data-category="<%= post.category %>"
+                                            data-date="<%= new Date(post.createdAt).toLocaleDateString() %>"
+                                            data-references="<%= post.references || '' %>">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                                        <% if (isAdmin) { %>
+                                            <div class="admin-actions">
+                                                <a href="/edit/<%= post._id %>" class="btn-edit">Edit</a>
+                                                <form method="POST" action="/delete/<%= post._id %>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                                    <button type="submit" class="btn-delete">Delete</button>
+                                                </form>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }); %>
+                    </div>
+
+                </div><!-- /zone-featured -->
+
+                <!-- ── ZONE 2: 3-COLUMN BROWSE GRID (posts 5–10) ── -->
+                <% if (posts.length > 4) { %>
+                    <div class="zone zone-grid">
+                        <% posts.slice(4, 10).forEach(function(post) { %>
+                            <article class="post-card post-card-grid">
+                                <div class="post-image-wrapper">
+                                    <% if (post.video) { %>
+                                        <video muted onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" class="post-image">
+                                            <source src="<%= post.video %>" type="video/mp4">
+                                        </video>
+                                    <% } else if (post.image) { %>
+                                        <img src="<%= post.image %>" alt="<%= post.title %>" class="post-image">
+                                    <% } %>
+                                </div>
+                                <div class="post-card-body">
+                                    <h3 class="post-title">
+                                        <a href="#" class="sidebar-trigger"
+                                            data-post-id="<%= post._id %>"
+                                            data-title="<%= post.title %>"
+                                            data-content="<%= post.content %>"
+                                            data-image="<%= post.image || '/images/placeholder.jpg' %>"
+                                            data-category="<%= post.category %>"
+                                            data-date="<%= new Date(post.createdAt).toLocaleDateString() %>"
+                                            data-references="<%= post.references || '' %>"><%= post.title %></a>
+                                    </h3>
+                                    <p class="post-excerpt"><%= post.content.substring(0, 100) %>…</p>
+                                    <div class="card-footer">
+                                        <a href="#" class="read-more sidebar-trigger"
+                                            data-post-id="<%= post._id %>"
+                                            data-title="<%= post.title %>"
+                                            data-content="<%= post.content %>"
+                                            data-image="<%= post.image || '/images/placeholder.jpg' %>"
+                                            data-category="<%= post.category %>"
+                                            data-date="<%= new Date(post.createdAt).toLocaleDateString() %>"
+                                            data-references="<%= post.references || '' %>">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                                        <% if (isAdmin) { %>
+                                            <div class="admin-actions">
+                                                <a href="/edit/<%= post._id %>" class="btn-edit">Edit</a>
+                                                <form method="POST" action="/delete/<%= post._id %>" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                                    <button type="submit" class="btn-delete">Delete</button>
+                                                </form>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </article>
+                        <% }); %>
+                    </div>
+                <% } %>
+
+               <!-- ── ZONE 3: DYNAMIC LOAD MORE ── -->
+                <div class="zone zone-overflow" id="dynamicZone">
+                    <!-- Posts load here via JavaScript -->
+                </div>
+
+                <% if (posts.length > 10) { %>
+                    <div class="load-more-wrap" id="loadMoreWrap">
+                        <button id="loadMoreBtn" class="btn-load-more" data-page="1">
+                            Load More 
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+                <% } %>
+
+            <% } %>
+        </section>
+
+        <%- include('partials/sidebar') %>
+
+    </main>
+
+    <%- include('partials/footer') %>
+    <script>
+        window.isAdmin = <% if (isAdmin) { %>true<% } else { %>false<% } %>;
+    </script>
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/index.js"></script>
+
+</body>
+</html>

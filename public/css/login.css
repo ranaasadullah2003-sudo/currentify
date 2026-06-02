@@ -1,0 +1,83 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border-top: 5px solid #E63946; /* Your brand red */
+}
+
+.login-box h2 {
+    color: #1D3557; /* Your brand navy */
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1D3557;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: #1D3557;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #E63946;
+}
+
+.error-msg {
+    background-color: #fee2e2;
+    color: #dc2626;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+}
+
+.back-home {
+    display: block;
+    margin-top: 25px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+}

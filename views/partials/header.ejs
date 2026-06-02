@@ -1,0 +1,129 @@
+﻿<header class="site-header">
+    <div class="header-container">
+
+        <!-- â”€â”€ Left: hamburger + logo + desktop search â”€â”€ -->
+        <div class="header-left">
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+
+            <h1 class="site-logo">
+                <a href="/">Currentify<span class="logo-dot"></span></a>
+            </h1>
+
+            <!-- Desktop search (hidden on mobile) -->
+            <form action="/search" method="GET" class="search-bar">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" name="query" placeholder="Search storiesâ€¦" required>
+                <button type="submit" aria-label="Submit search">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- â”€â”€ Right: nav â”€â”€ -->
+        <nav class="main-nav" id="mainNav">
+
+            <!-- Mobile search (inside drawer) -->
+            <div class="mobile-search-bar">
+                <form action="/search" method="GET">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" name="query" placeholder="Search storiesâ€¦" required>
+                    <button type="submit" aria-label="Search">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </form>
+            </div>
+
+            <ul>
+                <li><a href="/">Home</a></li>
+
+                <li class="has-mega-menu">
+                    <a href="#" class="nav-explore">
+                        Explore
+                        <svg class="explore-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-inner">
+
+                            <div class="mega-column">
+                                <h3>
+                                    <span class="col-icon"></span>
+                                    Politics &amp; World
+                                </h3>
+                                <a href="/category/Politics & World">All Politics</a>
+                                <a href="/subcategory/Government & Policy">Government &amp; Policy</a>
+                                <a href="/subcategory/Elections & Campaigns">Elections &amp; Campaigns</a>
+                                <a href="/subcategory/Global Diplomacy">Global Diplomacy</a>
+                                <a href="/subcategory/Conflicts & Crisis">Conflicts & Crisis</a>
+                                <a href="/subcategory/Human Rights">Human Rights</a>
+                                <a href="/subcategory/Regional Updates">Regional Updates</a>
+                            </div>
+
+                            <div class="mega-column">
+                                <h3>
+                                    <span class="col-icon"></span>
+                                    Business &amp; Tech
+                                </h3>
+                                <a href="/category/Business & Tech">All Tech</a>
+                                <a href="/subcategory/Markets & Economy">Markets &amp; Economy</a>
+                                <a href="/subcategory/Startups & Crypto">Startups & Crypto</a>
+                                <a href="/subcategory/Artificial Intelligence">Artificial Intelligence</a>
+                                <a href="/subcategory/Cybersecurity">Cybersecurity</a>
+                                <a href="/subcategory/Consumer Electronics">Consumer Electronics</a>
+                                <a href="/subcategory/Software & Apps">Software &amp; Apps</a>
+                            </div>
+
+                            <div class="mega-column">
+                                <h3>
+                                    <span class="col-icon"></span>
+                                    Science &amp; Environment
+                                </h3>
+                                <a href="/category/Science & Environment">All Science</a>
+                                <a href="/subcategory/Climate & Weather">Climate & Weather</a>
+                                <a href="/subcategory/Space Exploration">Space Exploration</a>
+                                <a href="/subcategory/Medical Research">Medical Research</a>
+                                <a href="/subcategory/Renewable Energy">Renewable Energy</a>
+                                <a href="/subcategory/Environmental Policy">Environmental Policy</a>
+                                <a href="/subcategory/Nature & Biodiversity">Nature &amp; Biodiversity</a>
+                            </div>
+
+                            <div class="mega-column">
+                                <h3>
+                                    <span class="col-icon"></span>
+                                    Sports &amp; Lifestyle
+                                </h3>
+                                <a href="/category/Sports & Lifestyle">All Sports</a>
+                                <a href="/subcategory/Cricket & Football">Cricket & Football</a>
+                                <a href="/subcategory/Tennis & Motorsports">Tennis & Motorsports</a>
+                                <a href="/subcategory/Movies & Television">Movies & Television</a>
+                                <a href="/category/Music Industry">Music Industry</a>
+                                <a href="/subcategory/Gaming & eSports">Gaming & eSports</a>
+                                <a href="/subcategory/Travel & Culture">Travel & Culture</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+
+                <% if (isAdmin) { %>
+                    <li class="nav-divider" aria-hidden="true"></li>
+                    <li><a href="/dashboard" class="nav-admin-link">Dashboard</a></li>
+                    <li><a href="/add" class="btn-add">+ Post</a></li>
+                    <li><a href="/logout" class="btn-logout">Logout</a></li>
+                <% } %>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<script src="/js/header.js"></script>
+

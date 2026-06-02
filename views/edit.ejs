@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post - Currentify</title>
+    
+    <link rel="stylesheet" href="/css/style.css">   
+    <link rel="stylesheet" href="/css/add.css"> 
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/dropdown.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .edit-preview-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('partials/header') %>
+
+<main class="main-layout">
+    <div class="form-container">
+        <h1>Edit Post</h1>
+        
+        <form action="/edit/<%= post._id %>" method="POST" enctype="multipart/form-data" class="add-post-form">
+            
+            <div class="form-group">
+                <label for="title">Post Title</label>
+                <input type="text" id="title" name="title" value="<%= post.title %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Main Category</label>
+                <select id="category" name="category" required onchange="updateSubCategories()">
+                    <option value="Politics & World" <%= post.category === 'Politics & World' ? 'selected' : '' %>>Politics & World</option>
+                    <option value="Business & Tech" <%= post.category === 'Business & Tech' ? 'selected' : '' %>>Business & Tech</option>
+                    <option value="Science & Environment" <%= post.category === 'Science & Environment' ? 'selected' : '' %>>Science & Environment</option>
+                    <option value="Sports & Lifestyle" <%= post.category === 'Sports & Lifestyle' ? 'selected' : '' %>>Sports & Lifestyle</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subCategory">Sub Category</label>
+                <select id="subCategory" name="subCategory" required>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Current Media</label>
+                <div class="current-media-preview">
+                    <% if (post.video) { %>
+                        <p>Current Video: <%= post.video.split('-').pop() %></p>
+                    <% } else if (post.image) { %>
+                        <img src="<%= post.image %>" alt="Current Image" class="edit-preview-img">
+                    <% } else { %>
+                        <p>No media uploaded.</p>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Replace Image (Optional)</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label for="video">Replace Video (Optional)</label>
+                <input type="file" id="video" name="video" accept="video/mp4,video/webm">
+            </div>
+
+            <div class="form-group">
+                <label for="content">Article Content</label>
+                <textarea id="content" name="content" rows="10" required><%= post.content %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>References / Sources (Optional)</label>
+                <div id="referencesContainer">
+                    <div class="reference-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <input type="text" name="refName[]" placeholder="Source Name (e.g. BBC News)" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <input type="url" name="refUrl[]" placeholder="https://..." style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <button type="button" class="btn-remove-ref" style="display: none; background: #ef4444; color: white; border: none; border-radius: 6px; padding: 10px 12px; cursor: pointer;">✕</button>
+                    </div>
+                </div>
+                <button type="button" id="addReferenceBtn" style="margin-top: 10px; background: #3b82f6; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 0.9rem;">+ Add Reference</button>
+                <small style="color: #64748b; display: block; margin-top: 5px;">Max 5 references. Leave empty if not needed.</small>
+            </div>
+
+            <button type="submit" class="btn-submit">Update Article</button>
+        </form>
+    </div>
+</main>
+
+<script>
+    // ==========================================
+    // CATEGORY / SUBCATEGORY LOGIC
+    // ==========================================
+    const categoryMap = {
+        "Politics & World": ["Government & Policy", "Elections & Campaigns", "Global Diplomacy", "Conflicts & Crisis", "Human Rights", "Regional Updates"],
+        "Business & Tech": ["Markets & Economy", "Startups & Crypto", "Artificial Intelligence", "Cybersecurity", "Consumer Electronics", "Software & Apps"],
+        "Science & Environment": ["Climate & Weather", "Space Exploration", "Medical Research", "Renewable Energy", "Environmental Policy", "Nature & Biodiversity"],
+        "Sports & Lifestyle": ["Cricket & Football", "Tennis & Motorsports", "Movies & Television", "Music Industry", "Gaming & eSports", "Travel & Culture"]
+    };
+
+    function updateSubCategories() {
+        const mainSelect = document.getElementById("category");
+        const subSelect = document.getElementById("subCategory");
+        const selectedMain = mainSelect.value;
+        const savedSub = '<%= post.subCategory %>';
+
+        subSelect.innerHTML = '';
+
+        if (categoryMap[selectedMain]) {
+            categoryMap[selectedMain].forEach(subCat => {
+                const option = document.createElement("option");
+                option.value = subCat;
+                option.textContent = subCat;
+                if (subCat === savedSub) option.selected = true;
+                subSelect.appendChild(option);
+            });
+        }
+    }
+
+    // ==========================================
+    // REFERENCES LOGIC
+    // ==========================================
+    let refCount = 1;
+    const maxRefs = 5;
+    const refContainer = document.getElementById('referencesContainer');
+    const addBtn = document.getElementById('addReferenceBtn');
+
+    function updateRemoveButtons() {
+        const rows = refContainer.querySelectorAll('.reference-row');
+        const removeBtns = refContainer.querySelectorAll('.btn-remove-ref');
+        if (rows.length > 1) {
+            removeBtns.forEach(btn => btn.style.display = 'inline-block');
+        } else {
+            removeBtns.forEach(btn => btn.style.display = 'none');
+        }
+    }
+
+    function addReferenceRow(name, url) {
+        name = name || '';
+        url = url || '';
+        const row = document.createElement('div');
+        row.className = 'reference-row';
+        row.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+        row.innerHTML = '<input type="text" name="refName[]" value="' + name.replace(/"/g, '&quot;') + '" placeholder="Source Name (e.g. BBC News)" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">' +
+                        '<input type="url" name="refUrl[]" value="' + url.replace(/"/g, '&quot;') + '" placeholder="https://..." style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">' +
+                        '<button type="button" class="btn-remove-ref" style="background: #ef4444; color: white; border: none; border-radius: 6px; padding: 10px 12px; cursor: pointer;">✕</button>';
+        refContainer.appendChild(row);
+
+        row.querySelector('.btn-remove-ref').addEventListener('click', function() {
+            row.remove();
+            refCount--;
+            updateRemoveButtons();
+            if (refCount < maxRefs) addBtn.style.display = 'inline-block';
+        });
+    }
+
+    // Load existing references
+    var existingRefs = <%- post.references || '[]' %>;
+    if (existingRefs && existingRefs.length > 0) {
+        var firstRow = refContainer.querySelector('.reference-row');
+        firstRow.querySelector('input[name="refName[]"]').value = existingRefs[0].name || '';
+        firstRow.querySelector('input[name="refUrl[]"]').value = existingRefs[0].url || '';
+        for (var i = 1; i < existingRefs.length; i++) {
+            addReferenceRow(existingRefs[i].name, existingRefs[i].url);
+        }
+        refCount = existingRefs.length;
+    }
+
+    updateRemoveButtons();
+    if (refCount >= maxRefs) addBtn.style.display = 'none';
+
+    addBtn.addEventListener('click', function() {
+        if (refCount >= maxRefs) return;
+        refCount++;
+        addReferenceRow('', '');
+        updateRemoveButtons();
+        if (refCount >= maxRefs) addBtn.style.display = 'none';
+    });
+
+    // Run on load
+    updateSubCategories();
+</script>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish Update - Currentify</title>
+    
+    <link rel="stylesheet" href="/css/style.css">   
+    <link rel="stylesheet" href="/css/add.css"> 
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/dropdown.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <%- include('partials/header') %>
+
+    <div class="container form-container">
+        <h2 class="page-title">Publish a New Update</h2>
+        
+        <form action="/add" method="POST" enctype="multipart/form-data" class="add-post-form">
+
+            <!-- ── Section: Article Details ── -->
+            <div class="form-group">
+                <label for="title">Post Title</label>
+                <input type="text" id="title" name="title" required placeholder="Enter an eye-catching headline...">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Main Category</label>
+                <select id="category" name="category" required onchange="updateSubCategories()">
+                    <option value="" disabled selected>Select Main Category...</option>
+                    <option value="Politics & World">Politics & World</option>
+                    <option value="Business & Tech">Business & Tech</option>
+                    <option value="Science & Environment">Science & Environment</option>
+                    <option value="Sports & Lifestyle">Sports & Lifestyle</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subCategory">Sub Category</label>
+                <select id="subCategory" name="subCategory" required>
+                    <option value="" disabled selected>Please select a Main Category first...</option>
+                </select>
+            </div>
+
+            <!-- ── Section: Media ── -->
+            <div class="form-section-label">Media</div>
+
+            <div class="form-group">
+                <label for="image">Featured Image <span style="font-weight:400; color:#94a3b8;">(Optional)</span></label>
+                <input type="file" id="image" name="image" accept="image/*"> 
+            </div>
+
+            <div class="form-group">
+                <label for="video">Video Clip <span style="font-weight:400; color:#94a3b8;">(Optional)</span></label>
+                <input type="file" id="video" name="video" accept="video/mp4,video/webm,video/ogg">
+                <small>Supported formats: MP4, WebM, Ogg &nbsp;·&nbsp; Max recommended size: 50MB</small>
+            </div>
+
+            <!-- ── Section: Content ── -->
+            <div class="form-section-label">Content</div>
+
+            <div class="form-group">
+                <label for="content">Article Content</label>
+                <textarea id="content" name="content" rows="10" required placeholder="Write your full article here..."></textarea>
+            </div>
+
+            <!-- ── Section: Sources ── -->
+            <div class="form-section-label">Sources</div>
+
+            <div class="form-group">
+                <label>References / Sources <span style="font-weight:400; color:#94a3b8;">(Optional)</span></label>
+                <div id="referencesContainer">
+                    <div class="reference-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <input type="text" name="refName[]" placeholder="Source Name (e.g. BBC News)" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <input type="url" name="refUrl[]" placeholder="https://..." style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <button type="button" class="btn-remove-ref" style="display: none; background: #ef4444; color: white; border: none; border-radius: 6px; padding: 10px 12px; cursor: pointer;">✕</button>
+                    </div>
+                </div>
+                <button type="button" id="addReferenceBtn" style="margin-top: 10px; background: #3b82f6; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 0.9rem;">+ Add Reference</button>
+                <small>Max 5 references &nbsp;·&nbsp; Leave empty if not needed</small>
+            </div>
+
+            <button type="submit" class="btn-submit">Publish Article</button>
+        </form>
+    </div>
+
+    <%- include('partials/footer') %>
+
+<script src="/js/add.js"></script>
+</body>
+</html>

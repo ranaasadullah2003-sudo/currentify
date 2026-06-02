@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Currentify</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dropdown.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <%- include('partials/header') %>
+
+    <main class="dashboard-container">
+
+        <!-- ═══ PAGE HEADER ═══ -->
+        <div class="dashboard-header">
+            <div class="dashboard-header-text">
+                <h1>Dashboard</h1>
+                <p class="dashboard-subtitle">Overview of your content performance</p>
+            </div>
+        </div>
+
+        <!-- ═══ STATS CARDS ═══ -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #e0f2fe;">
+                    <i class="fa-solid fa-newspaper" style="color: #0284c7;"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number"><%= totalPosts %></span>
+                    <span class="stat-label">Total Posts</span>
+                </div>
+                <div class="stat-trend stat-trend--up">
+                    <i class="fa-solid fa-newspaper stat-bg-icon" style="color:#0284c7;"></i>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #dcfce7;">
+                    <i class="fa-solid fa-mouse-pointer" style="color: #16a34a;"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number"><%= totalClicks %></span>
+                    <span class="stat-label">Total Clicks</span>
+                </div>
+                <div class="stat-trend">
+                    <i class="fa-solid fa-mouse-pointer stat-bg-icon" style="color:#16a34a;"></i>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fef3c7;">
+                    <i class="fa-solid fa-layer-group" style="color: #d97706;"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number"><%= categories.length %></span>
+                    <span class="stat-label">Categories</span>
+                </div>
+                <div class="stat-trend">
+                    <i class="fa-solid fa-layer-group stat-bg-icon" style="color:#d97706;"></i>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fce7f3;">
+                    <i class="fa-solid fa-eye" style="color: #db2777;"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number"><%= totalViews %></span>
+                    <span class="stat-label">Total Views</span>
+                </div>
+                <div class="stat-trend">
+                    <i class="fa-solid fa-eye stat-bg-icon" style="color:#db2777;"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ═══ TWO COLUMN: RECENT POSTS + CATEGORIES ═══ -->
+        <div class="dashboard-grid">
+
+           <!-- Recent Posts Table -->
+            <div class="dashboard-card" id="recentPostsCard">
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <span class="card-title-dot" style="background: #0284c7;"></span>
+                        <h2>Recent Posts</h2>
+                    </div>
+                    <button id="toggleAllPosts" class="view-all-toggle">
+                        <span class="toggle-text">View All</span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="posts-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Clicks</th>
+                                <th>Views</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentPostsBody">
+                            <% recentPosts.forEach(post => { %>
+                                <tr>
+                                    <td class="post-title-cell">
+                                        <a href="/?post=<%= post._id %>" class="dashboard-post-link"><%= post.title.substring(0, 50) %><%= post.title.length > 50 ? '...' : '' %></a>
+                                    </td>
+                                    <td><span class="badge"><%= post.category %></span></td>
+                                    <td class="metric-val"><%= post.clicks || 0 %></td>
+                                    <td class="metric-val"><%= post.views || 0 %></td>
+                                    <td class="date-cell"><%= new Date(post.createdAt).toLocaleDateString() %></td>
+                                </tr>
+                            <% }) %>
+                            <% if (recentPosts.length === 0) { %>
+                                <tr>
+                                    <td colspan="5" class="empty-cell">
+                                        <i class="fa-solid fa-newspaper"></i>
+                                        No posts yet. <a href="/add">Create your first post →</a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="allPostsContainer" style="display: none;">
+                    <div class="table-wrapper" style="margin-top: 16px;">
+                        <table class="posts-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Clicks</th>
+                                    <th>Views</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allPostsBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Breakdown -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <div class="card-title-dot" style="background:#d97706;"></div>
+                        <h2>Posts by Category</h2>
+                    </div>
+                </div>
+                <div class="category-list">
+                    <%
+                        let maxCount = 1;
+                        categories.forEach(c => { if (c.count > maxCount) maxCount = c.count; });
+                        const catColors = [
+                            'linear-gradient(90deg,#0284c7,#38bdf8)',
+                            'linear-gradient(90deg,#16a34a,#4ade80)',
+                            'linear-gradient(90deg,#d97706,#fbbf24)',
+                            'linear-gradient(90deg,#db2777,#f472b6)',
+                            'linear-gradient(90deg,#7c3aed,#a78bfa)',
+                            'linear-gradient(90deg,#E63946,#ff6b76)',
+                            'linear-gradient(90deg,#0f766e,#2dd4bf)',
+                            'linear-gradient(90deg,#1d4ed8,#60a5fa)',
+                        ];
+                    %>
+                    <% categories.forEach((cat, i) => { %>
+                        <div class="category-item">
+                            <div class="category-info">
+                                <span class="category-name"><%= cat._id %></span>
+                                <span class="category-count"><%= cat.count %> post<%= cat.count !== 1 ? 's' : '' %></span>
+                            </div>
+                            <div class="category-bar">
+                                <div class="category-fill"
+                                     style="width:<%= Math.round((cat.count / maxCount) * 100) %>%; background:<%= catColors[i % catColors.length] %>;"></div>
+                            </div>
+                        </div>
+                    <% }) %>
+                    <% if (categories.length === 0) { %>
+                        <p class="empty-cell">No categories yet.</p>
+                    <% } %>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ═══ TOP PERFORMING POSTS ═══ -->
+        <div class="dashboard-card full-width">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <div class="card-title-dot" style="background:#E63946;"></div>
+                    <h2>Top Performing Posts</h2>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table class="posts-table">
+                    <thead>
+                        <tr>
+                            <th class="th-rank">Rank</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Clicks</th>
+                            <th>Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% topPosts.forEach((post, index) => { %>
+                            <tr>
+                                <td class="rank-cell">
+                                    <% if (index === 0) { %>
+                                        <span class="rank-chip rank-gold">#1</span>
+                                    <% } else if (index === 1) { %>
+                                        <span class="rank-chip rank-silver">#2</span>
+                                    <% } else if (index === 2) { %>
+                                        <span class="rank-chip rank-bronze">#3</span>
+                                    <% } else { %>
+                                        <span class="rank-chip rank-plain">#<%= index + 1 %></span>
+                                    <% } %>
+                                </td>
+                                <td class="post-title-cell">
+                                    <a href="/?post=<%= post._id %>" class="dashboard-post-link"><%= post.title.substring(0, 50) %><%= post.title.length > 50 ? '...' : '' %></a>
+                                </td>
+                                <td><span class="badge"><%= post.category %></span></td>
+                                <td><span class="metric-val"><%= post.clicks || 0 %></span></td>
+                                <td><span class="metric-val"><%= post.views || 0 %></span></td>
+                            </tr>
+                        <% }) %>
+                        <% if (topPosts.length === 0) { %>
+                            <tr>
+                                <td colspan="5" class="empty-cell">
+                                    <i class="fa-solid fa-chart-bar"></i>
+                                    No data yet.
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script>
+
+        const toggleBtn = document.getElementById('toggleAllPosts');
+        const recentPostsBody = document.getElementById('recentPostsBody');
+        const toggleText = toggleBtn.querySelector('.toggle-text');
+        const toggleIcon = toggleBtn.querySelector('.toggle-icon');
+        let allPostsLoaded = false;
+        let isExpanded = false;
+        let recentPostsHTML = recentPostsBody.innerHTML; // Save original recent posts
+
+        toggleBtn.addEventListener('click', async function() {
+            if (!allPostsLoaded) {
+                try {
+                    const res = await fetch('/api/all-posts');
+                    const posts = await res.json();
+                    
+                    if (posts.length === 0) {
+                        recentPostsBody.innerHTML = '<tr><td colspan="5" class="empty-cell">No posts found.</td></tr>';
+                    } else {
+                        recentPostsBody.innerHTML = posts.map(function(post) {
+                            return '<tr>' +
+                                '<td class="post-title-cell"><a href="/?post=' + post._id + '" class="dashboard-post-link">' + escapeHtml(post.title).substring(0, 50) + (post.title.length > 50 ? '...' : '') + '</a></td>' +
+                                '<td><span class="badge">' + escapeHtml(post.category) + '</span></td>' +
+                                '<td class="metric-val">' + (post.clicks || 0) + '</td>' +
+                                '<td class="metric-val">' + (post.views || 0) + '</td>' +
+                                '<td class="date-cell">' + new Date(post.createdAt).toLocaleDateString() + '</td>' +
+                                '</tr>';
+                        }).join('');
+                    }
+                    allPostsLoaded = true;
+                } catch(err) {
+                    recentPostsBody.innerHTML = '<tr><td colspan="5" class="empty-cell">Error loading posts.</td></tr>';
+                }
+            }
+
+            isExpanded = !isExpanded;
+            if (isExpanded) {
+                // Show all posts (already loaded above)
+                toggleText.textContent = 'Show Less';
+                toggleIcon.className = 'fa-solid fa-chevron-up';
+            } else {
+                // Restore original recent posts
+                recentPostsBody.innerHTML = recentPostsHTML;
+                allPostsLoaded = false; // Reset so it fetches fresh next time
+                toggleText.textContent = 'View All';
+                toggleIcon.className = 'fa-solid fa-chevron-down';
+            }
+        });
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+        
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('post');
+            if (postId) {
+                window.addEventListener('DOMContentLoaded', function() {
+                    const trigger = document.querySelector('.sidebar-trigger[data-post-id="' + postId + '"]');
+                    if (trigger) {
+                        // Scroll to the post card first
+                        const card = trigger.closest('.post-card');
+                        if (card) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        // Then open sidebar after a short delay
+                        setTimeout(function() {
+                            trigger.click();
+                        }, 600);
+                    }
+                });
+            }
+        })();
+
+        /* Animate category bars on load */
+        document.addEventListener('DOMContentLoaded', function () {
+            const fills = document.querySelectorAll('.category-fill');
+            fills.forEach(function (el) {
+                const target = el.style.width;
+                el.style.width = '0%';
+                requestAnimationFrame(function () {
+                    setTimeout(function () {
+                        el.style.width = target;
+                    }, 80);
+                });
+            });
+        });
+
+        
+    </script>
+
+</body>
+</html>

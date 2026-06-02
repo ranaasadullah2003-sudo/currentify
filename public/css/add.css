@@ -1,0 +1,660 @@
+/* ============================================================
+   ADD.CSS — Currentify Publish Post
+   Aesthetic: Editorial command-centre — structured, precise, premium
+   Brand: #1D3557 navy · #E63946 red · #0d1b2a ink
+   ============================================================ */
+
+:root {
+    --form-bg:         #f3f5f8;
+    --form-surface:    #ffffff;
+    --form-surface-2:  #f8fafc;
+    --form-border:     #e2e8f0;
+    --form-border-md:  #cbd5e1;
+    --form-text:       #1a2332;
+    --form-muted:      #5a6a7e;
+    --form-placeholder:#94a3b8;
+    --form-red:        #E63946;
+    --form-red-dk:     #bf2733;
+    --form-red-glow:   rgba(230,57,70,0.12);
+    --form-navy:       #1D3557;
+    --form-navy-light: rgba(29,53,87,0.06);
+    --form-blue:       #3b82f6;
+    --form-blue-dk:    #2563eb;
+    --form-blue-glow:  rgba(59,130,246,0.12);
+    --form-green:      #10b981;
+    --form-danger:     #ef4444;
+    --form-radius:     12px;
+    --form-radius-sm:  8px;
+    --form-shadow:     0 1px 3px rgba(13,27,42,0.06), 0 4px 16px rgba(13,27,42,0.07);
+    --form-shadow-lg:  0 2px 8px rgba(13,27,42,0.06), 0 16px 40px rgba(13,27,42,0.09);
+    --form-ease:       cubic-bezier(0.22, 1, 0.36, 1);
+    --field-height:    48px;
+}
+
+/* ============================================================
+   PAGE SHELL
+   ============================================================ */
+
+body {
+    background: var(--form-bg);
+}
+
+/* ============================================================
+   FORM CONTAINER
+   ============================================================ */
+
+.form-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 32px auto;
+    padding: 32px 20px;
+    background: var(--form-surface);
+    border-radius: var(--form-radius);
+    border: 1px solid var(--form-border);
+    box-shadow: var(--form-shadow);
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Red top accent bar */
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--form-navy) 0%, var(--form-red) 100%);
+    border-radius: var(--form-radius) var(--form-radius) 0 0;
+}
+
+/* ============================================================
+   PAGE TITLE
+   ============================================================ */
+
+.page-title {
+    margin: 0 0 36px;
+    color: var(--form-navy);
+    font-family: var(--serif, 'DM Serif Display', Georgia, serif);
+    font-size: 1.55rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--form-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Small red dot accent before title */
+.page-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--form-red);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   FORM GROUPS
+   ============================================================ */
+
+.form-group {
+    margin-bottom: 26px;
+    position: relative;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 32px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--form-text);
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   INPUTS, SELECTS, TEXTAREA
+   ============================================================ */
+
+.form-group input:not([type="file"]),
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    height: var(--field-height);
+    padding: 0 16px;
+    background: var(--form-surface);
+    border: 1.5px solid var(--form-border-md);
+    border-radius: var(--form-radius-sm);
+    font-family: var(--sans, 'Inter', system-ui, sans-serif);
+    font-size: 0.95rem;
+    color: var(--form-text);
+    transition:
+        border-color 0.22s ease,
+        box-shadow  0.22s ease,
+        background  0.22s ease;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-group input:not([type="file"])::placeholder,
+.form-group textarea::placeholder {
+    color: var(--form-placeholder);
+    font-weight: 400;
+}
+
+.form-group textarea {
+    height: auto;
+    padding: 14px 16px;
+    resize: vertical;
+    min-height: 200px;
+    line-height: 1.7;
+}
+
+/* Custom select arrow */
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6a7e' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+/* Focus states */
+.form-group input:not([type="file"]):focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--form-red);
+    background: #fffbfb;
+    box-shadow: 0 0 0 3px var(--form-red-glow);
+}
+
+/* Hover states */
+.form-group input:not([type="file"]):hover:not(:focus),
+.form-group select:hover:not(:focus),
+.form-group textarea:hover:not(:focus) {
+    border-color: #a0aec0;
+}
+
+/* Disabled select (sub-category before main selection) */
+.form-group select:disabled {
+    background: var(--form-surface-2);
+    color: var(--form-placeholder);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Small helper text */
+.form-group small {
+    display: block;
+    margin-top: 7px;
+    font-size: 0.8rem;
+    color: var(--form-muted);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   FILE UPLOAD FIELDS
+   ============================================================ */
+
+input[type="file"] {
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
+    padding: 20px 16px;
+    background: var(--form-surface-2);
+    border: 2px dashed var(--form-border-md);
+    border-radius: var(--form-radius-sm);
+    color: var(--form-muted);
+    font-family: var(--sans, 'Inter', system-ui, sans-serif);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition:
+        border-color 0.22s ease,
+        background   0.22s ease;
+    display: block;
+}
+
+input[type="file"]::file-selector-button {
+    background: var(--form-navy);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    margin-right: 14px;
+    transition: background 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--form-red);
+}
+
+input[type="file"]:hover {
+    border-color: var(--form-red);
+    background: #fff8f8;
+}
+
+input[type="file"]:focus {
+    outline: none;
+    border-color: var(--form-red);
+    box-shadow: 0 0 0 3px var(--form-red-glow);
+}
+
+/* ============================================================
+   REFERENCES SECTION
+   ============================================================ */
+
+#referencesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.reference-row {
+    display: flex;
+    gap: 10px;
+    align-items: center !important;
+    margin-bottom: 0 !important;
+}
+
+/* Override inline styles on reference inputs */
+.reference-row input[type="text"],
+.reference-row input[type="url"] {
+    flex: 1;
+    height: var(--field-height);
+    padding: 0 14px !important;
+    border: 1.5px solid var(--form-border-md) !important;
+    border-radius: var(--form-radius-sm) !important;
+    font-family: var(--sans, 'Inter', system-ui, sans-serif) !important;
+    font-size: 0.9rem !important;
+    color: var(--form-text) !important;
+    background: var(--form-surface) !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.22s ease, box-shadow 0.22s ease !important;
+    -webkit-appearance: none;
+    appearance: none;
+    width: auto !important;
+    min-width: 0;
+}
+
+.reference-row input[type="text"]::placeholder,
+.reference-row input[type="url"]::placeholder {
+    color: var(--form-placeholder);
+}
+
+.reference-row input[type="text"]:focus,
+.reference-row input[type="url"]:focus {
+    outline: none !important;
+    border-color: var(--form-red) !important;
+    box-shadow: 0 0 0 3px var(--form-red-glow) !important;
+    background: #fffbfb !important;
+}
+
+/* Remove button */
+.btn-remove-ref {
+    flex-shrink: 0;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    background: #fff0f0 !important;
+    color: var(--form-danger) !important;
+    border: 1.5px solid #fecaca !important;
+    border-radius: var(--form-radius-sm) !important;
+    cursor: pointer !important;
+    font-size: 0.85rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
+    line-height: 1 !important;
+}
+
+.btn-remove-ref:hover {
+    background: #fee2e2 !important;
+    border-color: #fca5a5 !important;
+    transform: scale(1.06) !important;
+}
+
+/* Add reference button */
+#addReferenceBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-top: 4px !important;
+    padding: 9px 18px !important;
+    background: var(--form-navy-light) !important;
+    color: var(--form-navy) !important;
+    border: 1.5px solid rgba(29,53,87,0.15) !important;
+    border-radius: var(--form-radius-sm) !important;
+    font-family: var(--sans, 'Inter', system-ui, sans-serif) !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+}
+
+#addReferenceBtn:hover {
+    background: var(--form-navy) !important;
+    color: #ffffff !important;
+    border-color: var(--form-navy) !important;
+}
+
+/* ============================================================
+   SECTION DIVIDER — visual grouping
+   ============================================================ */
+
+.form-section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--form-muted);
+    margin: 36px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--form-border);
+}
+
+/* ============================================================
+   SUBMIT BUTTON
+   ============================================================ */
+
+.btn-submit {
+    width: 100%;
+    height: 52px;
+    background: linear-gradient(135deg, var(--form-red) 0%, var(--form-red-dk) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--form-radius-sm);
+    font-family: var(--sans, 'Inter', system-ui, sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(230,57,70,0.35);
+    transition:
+        box-shadow  0.25s var(--form-ease),
+        transform   0.2s  var(--form-ease),
+        background  0.25s ease;
+    margin-top: 8px;
+}
+
+/* Shimmer sweep on hover */
+.btn-submit::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 30%,
+        rgba(255,255,255,0.12) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.btn-submit:hover {
+    box-shadow: 0 6px 22px rgba(230,57,70,0.48);
+    transform: translateY(-2px);
+}
+
+.btn-submit:hover::after {
+    transform: translateX(100%);
+}
+
+.btn-submit:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow: 0 2px 8px rgba(230,57,70,0.3);
+}
+
+/* ============================================================
+   MAIN LAYOUT (Post listing pages)
+   ============================================================ */
+
+.main-layout {
+    max-width: 100%;
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.posts-container {
+    flex: 1;
+    width: 100%;
+}
+
+.sidebar-container {
+    flex: 1;
+    width: 100%;
+    min-width: unset;
+}
+
+/* ============================================================
+   POSTS GRID
+   ============================================================ */
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.post-media img,
+.post-media video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    max-width: 100%;
+}
+
+/* ============================================================
+   TAGS
+   ============================================================ */
+
+.category-tags {
+    margin-bottom: 10px;
+}
+
+.tag-main {
+    background: var(--form-navy);
+    color: white;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+}
+
+.tag-sub {
+    color: var(--form-red);
+    font-weight: bold;
+    font-size: 0.75rem;
+    margin-left: 8px;
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--form-surface);
+    border-radius: var(--form-radius);
+    border: 1px solid var(--form-border);
+    box-shadow: var(--form-shadow);
+}
+
+.btn-return {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 28px;
+    background: var(--form-red);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--form-radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s ease, transform 0.2s var(--form-ease), box-shadow 0.2s ease;
+    box-shadow: 0 3px 10px rgba(230,57,70,0.3);
+}
+
+.btn-return:hover {
+    background: var(--form-red-dk);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(230,57,70,0.4);
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (481px–768px)
+   ============================================================ */
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .form-container {
+        max-width: 100%;
+        margin: 40px auto;
+        padding: 36px 28px;
+    }
+
+    .page-title {
+        font-size: 1.6rem;
+        margin-bottom: 32px;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .main-layout {
+        max-width: 100%;
+        margin: 40px auto;
+        padding: 0 20px;
+        gap: 25px;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — DESKTOP (769px–1100px)
+   ============================================================ */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+    .form-container {
+        max-width: 620px;
+        margin: 52px auto;
+        padding: 44px 40px;
+    }
+
+    .page-title {
+        font-size: 1.7rem;
+        margin-bottom: 34px;
+    }
+
+    .main-layout {
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 0 25px;
+        gap: 30px;
+    }
+
+    .posts-container {
+        flex: 2;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — LARGE DESKTOP (1101px+)
+   ============================================================ */
+
+@media (min-width: 1101px) {
+    .form-container {
+        max-width: 720px;
+        margin: 64px auto;
+        padding: 52px 56px;
+        border-radius: 16px;
+    }
+
+    .page-title {
+        font-size: 1.9rem;
+        margin-bottom: 40px;
+        padding-bottom: 22px;
+    }
+
+    .form-group {
+        margin-bottom: 28px;
+    }
+
+    .btn-submit {
+        height: 56px;
+        font-size: 1.05rem;
+    }
+
+    .main-layout {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+        gap: 30px;
+        flex-direction: row;
+    }
+
+    .posts-container {
+        flex: 3;
+    }
+
+    .sidebar-container {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .empty-state {
+        padding: 60px;
+    }
+
+    .reference-row input[type="text"],
+    .reference-row input[type="url"] {
+        font-size: 0.93rem !important;
+    }
+}

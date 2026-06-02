@@ -1,0 +1,221 @@
+/* ==========================================
+   SIDEBAR - MOBILE FIRST RESPONSIVE
+   ========================================== */
+
+/* --- MOBILE FIRST --- */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    transform: translateX(100%);
+    left: auto;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: #ffffff;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+    left: auto;
+    pointer-events: auto;
+}
+
+.sidebar-header {
+    background-color: #1D3557;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 3px solid #E63946;
+    pointer-events: auto;
+}
+
+.sidebar-category-label {
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    font-size: 1.8rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    padding: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.close-btn:hover,
+.close-btn:focus-visible {
+    transform: scale(1.1);
+    color: #E63946;
+    background: rgba(255, 255, 255, 0.18);
+    outline: none;
+}
+
+/* --- Sidebar Overlay --- */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    pointer-events: auto;
+}
+
+/* --- Sidebar Content --- */
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#sidebarImageContainer img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+#sidebarTextContainer {
+    padding: 20px;
+}
+
+#sidebarTitle {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1D3557;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+#sidebarDate {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+#sidebarBody {
+    line-height: 1.8;
+    color: #334155;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+}
+
+/* ==========================================
+   MEDIA QUERIES - TABLET (481px - 768px)
+   ========================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+    .sidebar {
+        top: 60px;
+        height: calc(100vh - 60px);
+        width: 100%;
+    }
+    
+    .sidebar-header {
+        height: 75px;
+        padding: 0 22px;
+    }
+    
+    .sidebar-category-label {
+        font-size: 0.9rem;
+    }
+    
+    .close-btn {
+        font-size: 2rem;
+    }
+    
+    #sidebarImageContainer img {
+        max-height: 220px;
+    }
+    
+    #sidebarTextContainer {
+        padding: 25px;
+    }
+    
+    #sidebarTitle {
+        font-size: 1.8rem;
+    }
+    
+    #sidebarBody {
+        font-size: 1rem;
+    }
+}
+
+/* ==========================================
+   MEDIA QUERIES - DESKTOP (769px+)
+   ========================================== */
+@media (min-width: 769px) {
+    .sidebar {
+        top: 60px;
+        height: calc(100vh - 60px);
+        width: 55%;
+        transform: translateX(100%);
+    }
+    
+    .sidebar-header {
+        height: 80px;
+        padding: 0 25px;
+    }
+    
+    .sidebar-category-label {
+        font-size: 0.9rem;
+        letter-spacing: 1.5px;
+    }
+    
+    .close-btn {
+        font-size: 2.2rem;
+    }
+
+    #sidebarImageContainer img {
+        max-height: 250px;
+    }
+    
+    #sidebarTextContainer {
+        padding: 30px;
+    }
+    
+    #sidebarTitle {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+    }
+    
+    #sidebarBody {
+        font-size: 1.1rem;
+    }
+}
